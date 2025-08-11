@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Colorizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen flex items-center justify-center p-5 text-white">
+
+    <div class="bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 max-w-4xl w-full border border-gray-700">
+        <h1 class="text-4xl font-bold text-center text-indigo-400 mb-6">🎨 Image Colorizer</h1>
+        <p class="text-center text-gray-300 mb-8">Upload your black & white image to bring it to life with colors!</p>
+
+        <form action="/" method="post" enctype="multipart/form-data" class="flex flex-col items-center gap-4 mb-8">
+            <input type="file" name="file" accept="image/*" required
+                   class="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4
+                          file:rounded-full file:border-0
+                          file:text-sm file:font-semibold
+                          file:bg-indigo-600/20 file:text-indigo-300
+                          hover:file:bg-indigo-600/30 cursor-pointer" />
+
+            <button type="submit"
+                    class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition">
+                Colorize Image
+            </button>
+        </form>
+
+        {% if original_image and colorized_image %}
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="text-center">
+                <h2 class="text-lg font-semibold text-indigo-300 mb-2">Original Image</h2>
+                <img src="data:image/png;base64,{{ original_image }}" alt="Original"
+                     class="rounded-lg shadow-md mx-auto border border-gray-700">
+            </div>
+            <div class="text-center">
+                <h2 class="text-lg font-semibold text-indigo-300 mb-2">Colorized Image</h2>
+                <img src="data:image/png;base64,{{ colorized_image }}" alt="Colorized"
+                     class="rounded-lg shadow-md mx-auto mb-4 border border-gray-700">
+                <a href="data:image/png;base64,{{ colorized_image }}" download="colorized.png"
+                   class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+                    ⬇ Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="mt-8 text-center">
+            <a href="/"
+               class="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition">
+                ⬅ Back to Home
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
